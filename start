@@ -1,0 +1,7 @@
+grass --tmp-location XY --exec env | \
+    grep -E "^(GRASS_.*|LD_LIBRARY_PATH|PATH|PYTHONPATH|MANPATH|TMPDIR|GISBASE)=" | \
+    sed -e 's/^\([^=]\+\)=\(.*\)$/export \1="\2" /g' > /tmp/vars.txt
+
+source /tmp/vars.txt
+
+exec "$@"
